@@ -10,6 +10,11 @@ const contactSchema = Joi.object({
     .required(),
 });
 
+const updateStatusContactSchema = Joi.object({
+  favorite: Joi.boolean().required(),
+});
+
 module.exports = {
   contactSchema,
+  updateStatusContactSchema,
 };
