@@ -8,6 +8,7 @@ const contactSchema = Joi.object({
   phone: Joi.string()
     .pattern(/^[(][0-9]{3}[)] [0-9]{3}-[0-9]{4}/)
     .required(),
+  favorite: Joi.boolean(),
 });
 
 const updateStatusContactSchema = Joi.object({
