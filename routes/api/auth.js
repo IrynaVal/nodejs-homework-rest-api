@@ -5,7 +5,6 @@ const ctrl = require("../../controllers/auth-controllers");
 const { validateBody } = require("../../decorators");
 
 const { registerSchema, loginSchema } = require("../../schemas/users-schema");
-const { validate } = require("../../models/user");
 
 const router = express.Router();
 

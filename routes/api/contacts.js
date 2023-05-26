@@ -7,22 +7,38 @@ const {
   updateStatusContactSchema,
 } = require("../../schemas/contacts-schemas");
 
-const { validateBody } = require("../../decorators");
+const { validateBody, authenticate } = require("../../decorators");
 
 const { isValidId } = require("../../helpers");
 
 const router = express.Router();
 
-router.get("/", contactsController.listContacts);
+router.get("/", authenticate, contactsController.listContacts);
 
-router.get("/:contactId", isValidId, contactsController.getContactById);
+router.get(
+  "/:contactId",
+  authenticate,
+  isValidId,
+  contactsController.getContactById
+);
 
-router.post("/", validateBody(contactSchema), contactsController.addContact);
+router.post(
+  "/",
+  authenticate,
+  validateBody(contactSchema),
+  contactsController.addContact
+);
 
-router.delete("/:contactId", isValidId, contactsController.removeContact);
+router.delete(
+  "/:contactId",
+  authenticate,
+  isValidId,
+  contactsController.removeContact
+);
 
 router.put(
   "/:contactId",
+  authenticate,
   isValidId,
   validateBody(contactSchema),
   contactsController.updateContact
@@ -30,6 +46,7 @@ router.put(
 
 router.patch(
   "/:contactId/favorite",
+  authenticate,
   isValidId,
   validateBody(updateStatusContactSchema),
   contactsController.updateStatusContact
