@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const { handleMongooseError } = require("../helpers");
 
-// const emailRegexp ={ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }
+const emailRegexp = { minDomainSegments: 2, tlds: { allow: ["com", "net"] } };
 
 const userSchema = new Schema(
   {
@@ -12,7 +12,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: [true, "Email is required"],
-      //   match: emailRegexp,
+      match: emailRegexp,
       unique: true,
     },
     subscription: {
