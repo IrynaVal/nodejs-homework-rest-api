@@ -2,7 +2,7 @@ const express = require("express");
 
 const authController = require("../../controllers/auth-controllers");
 
-const { validateBody, authenticate } = require("../../decorators");
+const { validateBody, authenticate } = require("../../middlewares");
 
 const { isValidId } = require("../../helpers");
 

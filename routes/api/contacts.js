@@ -7,7 +7,7 @@ const {
   updateStatusContactSchema,
 } = require("../../schemas/contacts-schemas");
 
-const { validateBody, authenticate } = require("../../decorators");
+const { validateBody, authenticate } = require("../../middlewares");
 
 const { isValidId } = require("../../helpers");
 

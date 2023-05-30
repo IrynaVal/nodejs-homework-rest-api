@@ -5,7 +5,7 @@ const User = require("../models/user");
 
 const { HttpError } = require("../helpers");
 
-const { ctrlWrapper } = require("../decorators");
+const { ctrlWrapper } = require("../middlewares");
 
 const { SECRET_KEY } = process.env;
 
@@ -14,15 +14,17 @@ const register = async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user) {
-    throw new HttpError(409, "Email in use");
+    throw HttpError(409, "Email in use");
   }
   const hashPassword = await bcrypt.hash(password, 10);
 
   const newUser = await User.create({ ...req.body, password: hashPassword });
 
   res.status(201).json({
-    email: newUser.email,
-    subscription: newUser.subscription,
+    user: {
+      email: newUser.email,
+      subscription: newUser.subscription,
+    },
   });
 };
 
@@ -30,11 +32,11 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    throw new HttpError(401, "Email or password is wrong");
+    throw HttpError(401, "Email or password is wrong");
   }
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    throw new HttpError(401, "Email or password is wrong");
+    throw HttpError(401, "Email or password is wrong");
   }
 
   const payload = {
@@ -75,7 +77,7 @@ const updateSubscription = async (req, res) => {
     new: true,
   });
   if (!result) {
-    throw new HttpError(404, `User ${userId} is not found.`);
+    throw HttpError(404, `User ${userId} is not found.`);
   }
   res.json(result);
 };
