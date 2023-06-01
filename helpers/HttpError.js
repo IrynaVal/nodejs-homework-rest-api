@@ -1,17 +1,17 @@
-// const errorMessageList = {
-//   400: "Bad Request",
-//   401: "Unauthorized",
-//   403: "Forbidden",
-//   404: "Not Found",
-//   409: "Conflict",
-// };
+const errorMessageList = {
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  409: "Conflict",
+};
 
-// class HttpError extends Error {
-//   constructor(statusCode, message = errorMessageList[statusCode]) {
-//     super(message);
-//     this.statusCode = statusCode;
-//   }
-// }
+class HttpError extends Error {
+  constructor(statusCode, message = errorMessageList[statusCode]) {
+    super(message);
+    this.statusCode = statusCode;
+  }
+}
 
 // class HttpError extends Error {
 //   constructor(statusCode, message) {
@@ -20,10 +20,10 @@
 //   }
 // }
 
-const HttpError = (status, message) => {
-  const error = new Error(message);
-  error.status = status;
-  return error;
-};
+// const HttpError = (status, message) => {
+//   const error = new Error(message);
+//   error.status = status;
+//   return error;
+// };
 
 module.exports = HttpError;
