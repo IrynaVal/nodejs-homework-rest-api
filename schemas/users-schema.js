@@ -19,8 +19,15 @@ const updateSubscriptionSchema = Joi.object({
   subscription: Joi.string().required(),
 });
 
+const userEmailSchema = Joi.object({
+  email: Joi.string()
+    .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+    .required(),
+});
+
 module.exports = {
   registerSchema,
   loginSchema,
   updateSubscriptionSchema,
+  userEmailSchema,
 };
